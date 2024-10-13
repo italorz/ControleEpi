@@ -1,8 +1,13 @@
+using ControleEpi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+var conexao = builder.Configuration.GetConnectionString("conexao");
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<AppdbContext>(options => options.UseMySql(conexao, ServerVersion.AutoDetect(conexao)));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

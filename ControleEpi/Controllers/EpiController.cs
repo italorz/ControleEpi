@@ -91,23 +91,5 @@ public class EpiController:ControllerBase
 
     }
 
-    [HttpGet("{id}", Name = "UsuariosComEpi")]
-
-    public ActionResult UsuariosComEpi(int id)
-    {
-        if (id <=0)
-        {
-            return BadRequest("id nao infomado");
-        }
-        var comEpi = _context.epis.Include(x => x.listaEpis)
-                                    .ThenInclude(c => c.ColaboradorId)
-                                    .FirstOrDefault(f => f.EpiId == id);
-        if (comEpi is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(comEpi);
-
-    }
+    
 }

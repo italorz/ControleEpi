@@ -10,7 +10,7 @@ namespace ControleEpi.Model
         public string? ColaboradorNome { get; set; }
         public DateOnly DataAdmissao { get; set; }
         public DateOnly DataDemissao { get; set; }
-        public ICollection<ListaEpi>? listaEpis { get; set; }
+        public ICollection<ListaEpi> listaEpis { get; set; }
 
     }
 }

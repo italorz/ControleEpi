@@ -6,6 +6,6 @@
         public int EpiId { get; set; }
         public int ColaboradorId { get; set; }
         public Epi? Epi { get; set; }
-        public Colaborador? colaborador { get; set; }
+        public Colaborador colaborador { get; set; }
     }
 }

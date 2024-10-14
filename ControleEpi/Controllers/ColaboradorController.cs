@@ -16,21 +16,22 @@ namespace ControleEpi.Controllers
             _context = context;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Colaborador>> AllColaborador()
+        public ActionResult<IEnumerable<Colaborador>> AllColaborador(int take = 50, int skip = 0)
         {
-            var registro = _context.colaboradors.ToList();
+            var registro = _context.colaboradors.Take(take).Skip(skip).ToList();
 
             if (registro is null) return NotFound("não existe o nenhum colaborador cadastrado");
 
             return Ok(registro);
         
         }
-        [HttpGet(Name = "colaborador_include_epi")]
-        public ActionResult<IEnumerable<Colaborador>> ColaboradorIncludeEpi()
+        [HttpGet("{id:int}/epis", Name = "colaborador_include_epi")]
+        public ActionResult colaboradorEpis (int id)
         {
             var registro = _context.colaboradors.Include(e=> e.listaEpis)
                                                 .ThenInclude(ep => ep.Epi)    
-                                                .ToList();
+                                                .FirstOrDefault(colaborador =>      
+                                                colaborador.ColaboradorId == id );
 
             if (registro is null) return NotFound("não existe o nenhum colaborador cadastrado");
 
